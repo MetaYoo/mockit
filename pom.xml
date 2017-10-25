@@ -11,6 +11,7 @@
     <modules>
         <module>mockit-util</module>
         <module>mockit-database</module>
+        <module>mockit-dubbo</module>
     </modules>
 
     <packaging>pom</packaging>
