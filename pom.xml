@@ -10,7 +10,7 @@
 
     <modules>
         <module>mockit-util</module>
-        <module>mockit-database</module>
+        <module>mockit-db</module>
         <module>mockit-dubbo</module>
     </modules>
 
