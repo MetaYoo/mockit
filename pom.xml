@@ -25,6 +25,7 @@
         <druid.version>1.1.4</druid.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <dubbo.version>2.5.6</dubbo.version>
+        <jmockit.version>1.35</jmockit.version>
     </properties>
 
     <dependencyManagement>
@@ -59,6 +60,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jmockit</groupId>
+                <artifactId>jmockit</artifactId>
+                <version>${jmockit.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
