@@ -19,6 +19,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.kotall.mock</groupId>
+            <artifactId>mockit-util</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
