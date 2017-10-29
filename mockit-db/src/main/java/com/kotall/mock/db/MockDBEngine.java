@@ -1,5 +1,7 @@
 package com.kotall.mock.db;
 
+import com.kotall.mock.db.exception.MockDbException;
+
 import java.sql.Connection;
 
 /**
@@ -17,9 +19,9 @@ public interface MockDBEngine {
      * 4. 向表中插入初始化数据
      * 5. 设置表运行 flag 为 true
      *  Statement:
-     *  @throws Exception
+     *  @throws MockDbException
      */
-    void startUp() throws Exception;
+    void startUp() throws MockDbException;
 
     /**
      * 返回当前数据库引擎的运行状态
@@ -31,9 +33,9 @@ public interface MockDBEngine {
     /**
      * 刷新当前数据库引擎
      *  Statement:
-     *  @throws Exception
+     *  @throws MockDbException
      */
-    void refresh() throws Exception;
+    void refresh() throws MockDbException;
 
     /**
      * 从数据源中得到数据库连接Connection
@@ -41,13 +43,13 @@ public interface MockDBEngine {
      *  @return
      *  @throws Exception
      */
-    Connection getConnection() throws Exception;
+    Connection getConnection() throws MockDbException;
 
     /**
      * 执行数据库操作语句
      *  Statement:
      *  @param statement
-     *  @throws Exception
+     *  @throws MockDbException
      */
-    void execute(String statement) throws Exception;
+    void execute(String statement) throws MockDbException;
 }
