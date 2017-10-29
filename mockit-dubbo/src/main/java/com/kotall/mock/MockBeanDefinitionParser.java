@@ -1,27 +1,68 @@
 package com.kotall.mock;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
-import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.xml.BeanDefinitionParser;
+import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-public class MockBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class MockBeanDefinitionParser implements BeanDefinitionParser {
 
-    @Override
-    protected Class<?> getBeanClass(Element element) {
-        return ReferenceConfig.class;
+    private static final String XSD_ID = "id";
+    private static final String XSD_NAME = "name";
+    private static final String XSD_INTERFACE = "interface";
+    private static final String ID = "id";
+    private static final String INTERFACE_NAME = "interfaceName";
+    private static final String INTERFACE_CLS = "interfaceCls";
+    private final Class<?> beanClass;
+
+    public MockBeanDefinitionParser(Class<?> beanClass)
+    {
+        this.beanClass = beanClass;
     }
 
-    @Override
-    protected void doParse(Element element, BeanDefinitionBuilder builder) {
-        String id = element.getAttribute("id");
-        String interfaceName = element.getAttribute("interface");
+    public BeanDefinition parse(Element element, ParserContext parserContext)
+    {
+        return parse(element, parserContext, this.beanClass);
+    }
 
-        if (StringUtils.hasText(id)) {
-            builder.addPropertyValue("id", id);
+    private static BeanDefinition parse(Element element, ParserContext parserContext, Class<?> beanClass)
+    {
+        RootBeanDefinition beanDefinition = new RootBeanDefinition();
+        if (ReferenceConfig.class.equals(beanClass))
+        {
+            String interfaceName = element.getAttribute("interface");
+            if ((interfaceName != null) && (interfaceName.length() > 0))
+            {
+                ReferenceConfig.value = interfaceName;
+                beanDefinition.setBeanClass(beanClass);
+            }
+            else
+            {
+                throw new IllegalStateException("No 'interface' attribute defined.");
+            }
         }
-        if (StringUtils.hasText(interfaceName)) {
-            builder.addPropertyValue("interfaceName", interfaceName);
+        String id = element.getAttribute("id");
+        String name = element.getAttribute("name");
+        String interfaceCls = element.getAttribute("interface");
+        beanDefinition.getPropertyValues().addPropertyValue("interfaceName", name);
+        beanDefinition.getPropertyValues().addPropertyValue("interfaceCls", interfaceCls);
+        if ((id == null) || (id.length() == 0))
+        {
+            String generatedBeanName = name;
+            if ((generatedBeanName == null) || (generatedBeanName.length() == 0)) {
+                generatedBeanName = interfaceCls;
+                // generatedBeanName = beanClass.getName();
+            }
         }
+        if ((id != null) && (id.length() > 0))
+        {
+            if (parserContext.getRegistry().containsBeanDefinition(id)) {
+                throw new IllegalStateException("Duplicate spring bean id " + id);
+            }
+            parserContext.getRegistry().registerBeanDefinition(id, beanDefinition);
+            beanDefinition.getPropertyValues().addPropertyValue("id", id);
+        }
+        return beanDefinition;
     }
 }

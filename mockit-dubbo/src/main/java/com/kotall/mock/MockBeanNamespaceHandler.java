@@ -6,6 +6,6 @@ public class MockBeanNamespaceHandler extends NamespaceHandlerSupport {
 
     @Override
     public void init() {
-        registerBeanDefinitionParser("reference", new MockBeanDefinitionParser());
+        registerBeanDefinitionParser("reference", new MockBeanDefinitionParser(ReferenceConfig.class));
     }
 }
