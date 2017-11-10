@@ -1,4 +1,4 @@
-package com.kotall.mock;
+package com.kotall.mock.service;
 
 public interface PaymentService {
 

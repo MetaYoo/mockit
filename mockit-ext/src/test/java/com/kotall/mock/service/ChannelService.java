@@ -1,4 +1,4 @@
-package com.kotall.mock;
+package com.kotall.mock.service;
 
 /**
  * @author: aracwong
@@ -8,5 +8,5 @@ package com.kotall.mock;
  */
 public interface ChannelService {
 
-    String requestBank(String msg);
+    String request(String msg);
 }

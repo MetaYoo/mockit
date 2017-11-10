@@ -1,5 +1,7 @@
 package com.kotall.mock;
 
+import com.kotall.mock.service.ChannelService;
+import com.kotall.mock.service.PaymentService;
 import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,27 +12,27 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring-test.xml"})
-public class AppTest {
+public class MockExtTest {
 
     @Autowired
     PaymentService paymentService;
 
     @Autowired
-    WeChatPayService wechatPayService;
+    ChannelService channelService;
 
     @Test
     public void testMockExt() throws Exception {
 
         String expectedStr = "2017-11-11";
-        EasyMock.expect(paymentService.pay(EasyMock.isA(String.class))).andReturn(expectedStr).times(1);
+        EasyMock.expect(channelService.request(EasyMock.isA(String.class))).andReturn(expectedStr).times(1);
 
-        EasyMock.replay(paymentService);
+        EasyMock.replay(channelService);
 
-        String payResult = this.wechatPayService.pay("arac", "CNY930.00");
+        String payResult = this.paymentService.pay("CNY930.00");
 
-        EasyMock.verify(paymentService);
+        EasyMock.verify(channelService);
         Assert.assertNotNull(payResult);
-        Assert.assertEquals("User: arac payment info: 2017-11-11", payResult);
+        Assert.assertEquals("PAY_RESULT:2017-11-11", payResult);
     }
 
 }

@@ -11,9 +11,9 @@
         http://www.kotall.com/schema/mock-ext
         http://www.kotall.com/schema/mock-ext.xsd">
 
-    <context:component-scan base-package="com.kotall.mock"/>
+    <context:component-scan base-package="com.kotall.mock.service"/>
 
-    <mock:reference id="paymentService" interface="com.kotall.mock.PaymentService"/>
+    <mock:reference id="channelService" interface="com.kotall.mock.service.ChannelService"/>
 
 
 </beans>

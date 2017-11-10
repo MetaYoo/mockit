@@ -1,10 +1,10 @@
 package com.kotall.mock;
 
+import com.kotall.mock.service.PaymentService;
 import mockit.Mock;
 import mockit.MockUp;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  *  http://blog.csdn.net/fei33423/article/details/46653501
@@ -25,8 +25,8 @@ public class JMockitTest {
         }.getMockInstance();
 
         Assert.assertNotNull(paymentService);
-        String rs = paymentService.pay(100L);
-        Assert.assertEquals("pay money: 100.0", rs);
+        String rs = paymentService.pay("CNY930.00");
+        Assert.assertEquals("CNY930.00", rs);
     }
 
 
