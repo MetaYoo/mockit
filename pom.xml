@@ -11,7 +11,7 @@
     <modules>
         <module>mockit-util</module>
         <module>mockit-db</module>
-        <module>mockit-dubbo</module>
+        <module>mockit-ext</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -28,7 +28,7 @@
         <jmockit.version>1.35</jmockit.version>
         <guava.version>20.0</guava.version>
         <easymock.version>3.4</easymock.version>
-        <spring-test.version>4.3.12.RELEASE</spring-test.version>
+        <spring.version>4.3.4.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -81,9 +81,28 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>${spring-test.version}</version>
-                <scope>test</scope>
+                <version>${spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
