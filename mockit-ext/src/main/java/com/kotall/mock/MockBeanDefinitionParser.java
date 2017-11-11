@@ -11,9 +11,10 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
     private static final String XSD_ID = "id";
     private static final String XSD_NAME = "name";
     private static final String XSD_INTERFACE = "interface";
+
     private static final String ID = "id";
     private static final String INTERFACE_NAME = "interfaceName";
-    private static final String INTERFACE_CLS = "interfaceCls";
+    private static final String INTERFACE_CLASS = "interfaceClass";
     private final Class<?> beanClass;
 
     public MockBeanDefinitionParser(Class<?> beanClass)
@@ -42,11 +43,11 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
                 throw new IllegalStateException("No 'interface' attribute defined.");
             }
         }
-        String id = element.getAttribute("id");
-        String name = element.getAttribute("name");
-        String interfaceCls = element.getAttribute("interface");
-        beanDefinition.getPropertyValues().addPropertyValue("interfaceName", name);
-        beanDefinition.getPropertyValues().addPropertyValue("interfaceCls", interfaceCls);
+        String id = element.getAttribute(XSD_ID);
+        String name = element.getAttribute(XSD_NAME);
+        String interfaceCls = element.getAttribute(XSD_INTERFACE);
+        beanDefinition.getPropertyValues().addPropertyValue(INTERFACE_NAME, name);
+        beanDefinition.getPropertyValues().addPropertyValue(INTERFACE_CLASS, interfaceCls);
         if ((id == null) || (id.length() == 0))
         {
             String generatedBeanName = name;
@@ -61,7 +62,7 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
                 throw new IllegalStateException("Duplicate spring bean id " + id);
             }
             parserContext.getRegistry().registerBeanDefinition(id, beanDefinition);
-            beanDefinition.getPropertyValues().addPropertyValue("id", id);
+            beanDefinition.getPropertyValues().addPropertyValue(ID, id);
         }
         return beanDefinition;
     }
