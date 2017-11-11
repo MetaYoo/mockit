@@ -2,7 +2,9 @@ package com.kotall.mock;
 
 import com.kotall.mock.bean.ReferenceBean;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
-
+/**
+ * @author aracwong
+ */
 public class MockBeanNamespaceHandler extends NamespaceHandlerSupport {
 
     @Override

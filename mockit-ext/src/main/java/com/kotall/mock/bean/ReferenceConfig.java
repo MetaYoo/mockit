@@ -1,8 +1,9 @@
 package com.kotall.mock.bean;
 
 import java.io.Serializable;
-
-
+/**
+ * @author aracwong
+ */
 public class ReferenceConfig implements Serializable {
 
     private String id;
@@ -14,6 +15,9 @@ public class ReferenceConfig implements Serializable {
     }
 
     public String getId() {
+        if (null == id || id.length() == 0) {
+            return this.getInterfaceName();
+        }
         return this.id;
     }
 
@@ -21,26 +25,10 @@ public class ReferenceConfig implements Serializable {
         this.id = id;
     }
 
-    public String getInterface() {
-        return interfaceName;
-    }
-
-    public void setInterface(String interfaceName) {
-        this.interfaceName = interfaceName;
-        if (id == null || id.length() == 0) {
-            id = interfaceName;
-        }
-    }
-
-    public void setInterface(Class<?> interfaceClass) {
-        if (interfaceClass != null && !interfaceClass.isInterface()) {
-            throw new IllegalStateException("The interface class " + interfaceClass + " is not a interface!");
-        }
-        this.interfaceClass = interfaceClass;
-        setInterface(interfaceClass == null ? null : interfaceClass.getName());
-    }
-
     public String getInterfaceName() {
+        if (null == this.interfaceName) {
+            return interfaceClass.getName();
+        }
         return this.interfaceName;
     }
 
@@ -49,7 +37,12 @@ public class ReferenceConfig implements Serializable {
     }
 
     public void setInterfaceClass(Class<?> interfaceClass) {
-        setInterface(interfaceClass);
+        if (interfaceClass != null && !interfaceClass.isInterface()) {
+            throw new IllegalStateException("The interface class " + interfaceClass + " is not a interface!");
+        }
+        this.interfaceClass = interfaceClass;
+        // TODO: 2017/11/11 0011  to be study
+        this.setInterfaceName(interfaceClass.getName());
     }
 
     public Class<?> getInterfaceClass() {
@@ -66,7 +59,5 @@ public class ReferenceConfig implements Serializable {
         }
         return interfaceClass;
     }
-
-
 
 }

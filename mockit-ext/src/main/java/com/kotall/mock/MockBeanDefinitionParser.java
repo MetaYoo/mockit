@@ -7,6 +7,9 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
+/**
+ * @author aracwong
+ */
 public class MockBeanDefinitionParser implements BeanDefinitionParser {
 
     private static final String XSD_ID = "id";
@@ -23,6 +26,7 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
         this.beanClass = beanClass;
     }
 
+    @Override
     public BeanDefinition parse(Element element, ParserContext parserContext)
     {
         return parse(element, parserContext, this.beanClass);
