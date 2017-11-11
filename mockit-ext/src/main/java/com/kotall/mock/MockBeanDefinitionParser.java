@@ -1,5 +1,6 @@
 package com.kotall.mock;
 
+import com.kotall.mock.bean.ReferenceBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -30,12 +31,12 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
     private static BeanDefinition parse(Element element, ParserContext parserContext, Class<?> beanClass)
     {
         RootBeanDefinition beanDefinition = new RootBeanDefinition();
-        if (ReferenceConfig.class.equals(beanClass))
+        if (ReferenceBean.class.equals(beanClass))
         {
-            String interfaceName = element.getAttribute("interface");
+            String interfaceName = element.getAttribute(XSD_INTERFACE);
             if ((interfaceName != null) && (interfaceName.length() > 0))
             {
-                ReferenceConfig.value = interfaceName;
+                ReferenceBean.value = interfaceName;
                 beanDefinition.setBeanClass(beanClass);
             }
             else
@@ -46,16 +47,9 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
         String id = element.getAttribute(XSD_ID);
         String name = element.getAttribute(XSD_NAME);
         String interfaceCls = element.getAttribute(XSD_INTERFACE);
+
         beanDefinition.getPropertyValues().addPropertyValue(INTERFACE_NAME, name);
         beanDefinition.getPropertyValues().addPropertyValue(INTERFACE_CLASS, interfaceCls);
-        if ((id == null) || (id.length() == 0))
-        {
-            String generatedBeanName = name;
-            if ((generatedBeanName == null) || (generatedBeanName.length() == 0)) {
-                generatedBeanName = interfaceCls;
-                // generatedBeanName = beanClass.getName();
-            }
-        }
         if ((id != null) && (id.length() > 0))
         {
             if (parserContext.getRegistry().containsBeanDefinition(id)) {

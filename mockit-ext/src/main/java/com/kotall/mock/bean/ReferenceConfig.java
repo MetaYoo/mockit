@@ -1,11 +1,9 @@
-package com.kotall.mock;
+package com.kotall.mock.bean;
 
-import com.alibaba.dubbo.common.utils.ReflectUtils;
-import org.easymock.EasyMock;
-import org.springframework.beans.factory.FactoryBean;
+import java.io.Serializable;
 
 
-public class ReferenceConfig implements FactoryBean {
+public class ReferenceConfig implements Serializable {
 
     private String id;
     private String interfaceName;
@@ -69,27 +67,6 @@ public class ReferenceConfig implements FactoryBean {
         return interfaceClass;
     }
 
-    public Object getObject() throws Exception {
-        return EasyMock.createMock(ReflectUtils.forName(this.getInterfaceName()));
-    }
 
-    public Class<?> getObjectType() {
-        if (interfaceClass != null) {
-            return interfaceClass;
-        }
-        try {
-            if (interfaceName != null && interfaceName.length() > 0) {
-                this.interfaceClass = Class.forName(interfaceName, true, Thread.currentThread()
-                        .getContextClassLoader());
-            }
-        } catch (ClassNotFoundException t) {
-            throw new IllegalStateException(t.getMessage(), t);
-        }
-        return interfaceClass;
-    }
-
-    public boolean isSingleton() {
-        return true;
-    }
 
 }
