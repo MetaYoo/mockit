@@ -38,7 +38,6 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
             String interfaceName = element.getAttribute(XSD_INTERFACE);
             if ((interfaceName != null) && (interfaceName.length() > 0))
             {
-                ReferenceBean.value = interfaceName;
                 beanDefinition.setBeanClass(beanClass);
             }
             else

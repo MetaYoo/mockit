@@ -8,7 +8,6 @@ public class ReferenceConfig implements Serializable {
 
     private String id;
     private Class<?> interfaceClass;
-    public static String value;
 
     public ReferenceConfig() {
     }
