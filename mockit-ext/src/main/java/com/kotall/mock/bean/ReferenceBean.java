@@ -18,7 +18,7 @@ public class ReferenceBean extends ReferenceConfig implements FactoryBean {
 
     @Override
     public Object getObject() throws Exception {
-        return EasyMock.createMock(ReflectUtils.forName(super.getInterfaceName()));
+        return EasyMock.createMock(ReflectUtils.forName(super.getInterfaceClass().getName()));
     }
 
     @Override

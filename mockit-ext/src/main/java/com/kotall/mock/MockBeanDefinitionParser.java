@@ -13,11 +13,9 @@ import org.w3c.dom.Element;
 public class MockBeanDefinitionParser implements BeanDefinitionParser {
 
     private static final String XSD_ID = "id";
-    private static final String XSD_NAME = "name";
     private static final String XSD_INTERFACE = "interface";
 
     private static final String ID = "id";
-    private static final String INTERFACE_NAME = "interfaceName";
     private static final String INTERFACE_CLASS = "interfaceClass";
     private final Class<?> beanClass;
 
@@ -49,10 +47,8 @@ public class MockBeanDefinitionParser implements BeanDefinitionParser {
             }
         }
         String id = element.getAttribute(XSD_ID);
-        String name = element.getAttribute(XSD_NAME);
         String interfaceCls = element.getAttribute(XSD_INTERFACE);
 
-        beanDefinition.getPropertyValues().addPropertyValue(INTERFACE_NAME, name);
         beanDefinition.getPropertyValues().addPropertyValue(INTERFACE_CLASS, interfaceCls);
         if ((id != null) && (id.length() > 0))
         {
