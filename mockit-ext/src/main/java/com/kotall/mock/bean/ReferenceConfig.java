@@ -26,7 +26,7 @@ public class ReferenceConfig implements Serializable {
     }
 
     public String getInterfaceName() {
-        if (null == this.interfaceName) {
+        if (null == this.interfaceName || "".equals(this.interfaceName.trim())) {
             return interfaceClass.getName();
         }
         return this.interfaceName;
@@ -41,8 +41,6 @@ public class ReferenceConfig implements Serializable {
             throw new IllegalStateException("The interface class " + interfaceClass + " is not a interface!");
         }
         this.interfaceClass = interfaceClass;
-        // TODO: 2017/11/11 0011  to be study
-        this.setInterfaceName(interfaceClass.getName());
     }
 
     public Class<?> getInterfaceClass() {
