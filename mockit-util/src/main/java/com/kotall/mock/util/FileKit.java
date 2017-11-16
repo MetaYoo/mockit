@@ -20,7 +20,7 @@ public class FileKit {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String tmp = br.readLine();
             while (null != tmp) {
-                sb.append(tmp);
+                sb.append(tmp).append("\r\n");
                 tmp = br.readLine();
             }
         } catch (IOException e) {

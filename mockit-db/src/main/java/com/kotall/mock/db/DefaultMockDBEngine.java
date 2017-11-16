@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.google.common.base.Preconditions;
 import com.kotall.mock.db.exception.MockDbException;
 import com.kotall.mock.util.FileKit;
+import org.h2.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +37,8 @@ public class DefaultMockDBEngine implements MockDBEngine {
 
     private List<String> dataLocations = Collections.emptyList();
 
+    private String propLocation;
+
     @Override
     public void startUp() throws MockDbException {
         try {
@@ -55,8 +58,11 @@ public class DefaultMockDBEngine implements MockDBEngine {
 
     public void loadDbProps() throws Exception {
         props = new Properties();
-        InputStream is = this.getClass().getClassLoader()
-                .getResourceAsStream("META-INF/h2_db.properties");
+        String propFilePath = "META-INF/h2_db.properties";
+        if (!StringUtils.isNullOrEmpty(this.propLocation)) {
+            propFilePath = this.propLocation;
+        }
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream(propFilePath);
         props.load(is);
         if (null != is) {
             is.close();
@@ -114,6 +120,7 @@ public class DefaultMockDBEngine implements MockDBEngine {
         Statement statement = null;
         try {
             connection = this.getConnection();
+            connection.setAutoCommit(true);
             statement = connection.createStatement();
             statement.execute(sql);
         } catch (Exception e) {
@@ -158,5 +165,13 @@ public class DefaultMockDBEngine implements MockDBEngine {
 
     public void setDataLocations(List<String> dataLocations) {
         this.dataLocations = dataLocations;
+    }
+
+    public String getPropLocation() {
+        return propLocation;
+    }
+
+    public void setPropLocation(String propLocation) {
+        this.propLocation = propLocation;
     }
 }
