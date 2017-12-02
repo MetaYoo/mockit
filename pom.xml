@@ -56,11 +56,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossid</id>
+            <id>OSSRH</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>ossid</id>
+            <id>OSSRH</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
@@ -76,7 +76,7 @@
                         <version>1.6.3</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>ossid</serverId>
+                            <serverId>OSSRH</serverId>
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
