@@ -6,7 +6,7 @@
 
     <groupId>com.kotall.mock</groupId>
     <artifactId>mockit</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <modules>
         <module>mockit-util</module>
@@ -19,7 +19,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mockit.version>1.0-SNAPSHOT</mockit.version>
+        <mockit.version>1.0.0-SNAPSHOT</mockit.version>
         <junit.version>4.12</junit.version>
         <h2.version>1.4.196</h2.version>
         <druid.version>1.1.4</druid.version>
@@ -30,6 +30,40 @@
         <easymock.version>3.4</easymock.version>
         <spring.version>4.3.4.RELEASE</spring.version>
     </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>aracwong</name>
+            <email>aracwong@163.com</email>
+            <organization>kotall</organization>
+            <organizationUrl>http://www.kotall.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/aracwong/mockit.git</connection>
+        <developerConnection>scm:git:https://github.com/aracwong/mockit.git</developerConnection>
+        <url>https://github.com/aracwong/mockit.git</url>
+        <tag>1.0.0-SNAPSHOT</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossid</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossid</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>
@@ -117,6 +151,33 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
 </project>
