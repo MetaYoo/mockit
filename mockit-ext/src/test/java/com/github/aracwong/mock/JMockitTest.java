@@ -19,14 +19,14 @@ public class JMockitTest {
     public void testMockUp() {
         PaymentService paymentService = new MockUp<PaymentService>() {
             @Mock
-            public String pay(double amt) {
+            public String pay(String amt) {
                 return "pay money: " + amt;
             }
         }.getMockInstance();
 
         Assert.assertNotNull(paymentService);
         String rs = paymentService.pay("CNY930.00");
-        Assert.assertEquals("CNY930.00", rs);
+        Assert.assertEquals("pay money: CNY930.00", rs);
     }
 
 
