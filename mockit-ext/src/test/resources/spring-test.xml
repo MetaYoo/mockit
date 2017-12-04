@@ -11,7 +11,7 @@
         http://www.kotall.com/schema/mock-ext
         http://www.kotall.com/schema/mock-ext.xsd">
 
-    <context:component-scan base-package="com.kotall.mock.service"/>
+    <context:component-scan base-package="com.github.aracwong.mock.service"/>
 
     <mock:reference id="channelService" interface="com.github.aracwong.mock.service.ChannelService"/>
 

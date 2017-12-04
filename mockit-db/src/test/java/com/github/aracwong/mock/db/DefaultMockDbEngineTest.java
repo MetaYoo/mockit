@@ -1,6 +1,7 @@
 package com.github.aracwong.mock.db;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -17,9 +18,11 @@ import java.util.List;
  */
 public class DefaultMockDbEngineTest {
 
-    @Test
+    DefaultMockDBEngine engine;
+
+    @Before
     public void startUp() throws Exception {
-        DefaultMockDBEngine engine = new DefaultMockDBEngine();
+        engine = new DefaultMockDBEngine();
         List<String> schemaLists = new ArrayList<>();
         schemaLists.add("test-schema.sql");
         engine.setSchemaLocations(schemaLists);
@@ -33,20 +36,6 @@ public class DefaultMockDbEngineTest {
 
     @Test
     public void testManualPropLocation() throws Exception {
-        DefaultMockDBEngine engine = new DefaultMockDBEngine();
-        List<String> schemaLists = new ArrayList<>();
-        schemaLists.add("test-schema.sql");
-        engine.setSchemaLocations(schemaLists);
-
-        List<String> dataLists = new ArrayList<>();
-        dataLists.add("test-data.sql");
-        engine.setDataLocations(dataLists);
-
-        engine.setPropLocation("test_db.properties");
-
-        engine.startUp();
-
-
         String queryStr = "select * from MOCK_TEST where ID = 1";
         Connection conn = engine.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(queryStr);
