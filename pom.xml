@@ -6,7 +6,7 @@
 
     <groupId>com.github.aracwong</groupId>
     <artifactId>mockit</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>mockit</name>
     <url>https://github.com/aracwong/mockit.git</url>
     <description>A test mock util for java</description>
@@ -22,7 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mockit.version>1.0.0-SNAPSHOT</mockit.version>
+        <mockit.version>1.0.1-SNAPSHOT</mockit.version>
         <junit.version>4.12</junit.version>
         <h2.version>1.4.196</h2.version>
         <druid.version>1.1.4</druid.version>
