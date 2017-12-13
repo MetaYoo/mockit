@@ -23,7 +23,7 @@ import java.util.List;
  * @date : 2017/10/29 0029 下午 7:54
  * @version : 1.0.0
  */
-public class MockDbEngineTest {
+public class MockDbTest {
 
     MockDb engine;
 
