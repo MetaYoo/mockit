@@ -49,7 +49,7 @@ public interface DbEngine {
      * 从数据源中得到数据库连接Connection
      *  Statement:
      *  @return
-     *  @throws Exception
+     *  @throws MockDbException
      */
     Connection getConnection() throws MockDbException;
 
