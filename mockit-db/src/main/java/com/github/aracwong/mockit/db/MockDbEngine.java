@@ -6,19 +6,19 @@
  *
  */
 
-package com.github.aracwong.mock.db;
+package com.github.aracwong.mockit.db;
 
-import com.github.aracwong.mock.db.exception.MockDbException;
+import com.github.aracwong.mockit.db.exception.MockDbException;
 
 import java.sql.Connection;
 
 /**
  * 数据库引擎接口，提供数据库启动 刷新 取得连接及执行语句等功能
- * @Date   Oct 22, 2015
- * @author aracwong
- *
+ * @Date : Oct 22, 2015
+ * @author :  aracwong
+ * @since :  1.0.0
  */
-public interface MockDBEngine {
+public interface MockDbEngine {
     /**
      * 启动数据库
      * 1. 判断数据库引擎是否正在运行，是则刷新，否则重新加载启动

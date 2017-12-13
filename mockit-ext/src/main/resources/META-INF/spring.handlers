@@ -1,1 +1,1 @@
-http\://www.kotall.com/schema/mock-ext=com.github.aracwong.mock.MockBeanNamespaceHandler
+http\://www.kotall.com/schema/mock-ext=com.github.aracwong.mockit.ext.MockBeanNamespaceHandler

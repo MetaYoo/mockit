@@ -2,6 +2,11 @@ Test Mock Utils
 -------------------------------------------
 # mock db
   mock db engine with H2.
+  create the memory database instance by the following parameters:
+      1. `mode`: database model such as : Mysql or Oracle
+      2. `database`: database name.
+      3. `username`: database user.
+      4. `password`: database password.
 
 # mock rpc interface
   mock rpc interface like dubbo.

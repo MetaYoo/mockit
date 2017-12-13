@@ -5,17 +5,43 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-package com.github.aracwong.mock;
+package com.github.aracwong.mockit.ext.bean;
 
-import com.github.aracwong.mock.bean.ReferenceBean;
-import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
+import java.io.Serializable;
 /**
  * @author aracwong
  */
-public class MockBeanNamespaceHandler extends NamespaceHandlerSupport {
+public class ReferenceConfig implements Serializable {
 
-    @Override
-    public void init() {
-        registerBeanDefinitionParser("reference", new MockBeanDefinitionParser(ReferenceBean.class));
+    private String id;
+    private Class<?> interfaceClass;
+
+    public ReferenceConfig() {
     }
+
+    public String getId() {
+        if (null == id || id.length() == 0) {
+            return this.interfaceClass.getName();
+        }
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setInterfaceClass(Class<?> interfaceClass) {
+        if (interfaceClass != null && !interfaceClass.isInterface()) {
+            throw new IllegalStateException("The interface class " + interfaceClass + " is not a interface!");
+        }
+        this.interfaceClass = interfaceClass;
+    }
+
+    public Class<?> getInterfaceClass() {
+        if (interfaceClass != null) {
+            return interfaceClass;
+        }
+        return interfaceClass;
+    }
+
 }

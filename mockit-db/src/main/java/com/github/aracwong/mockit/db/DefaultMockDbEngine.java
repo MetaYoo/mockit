@@ -5,12 +5,12 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-package com.github.aracwong.mock.db;
+package com.github.aracwong.mockit.db;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.github.aracwong.mock.db.exception.MockDbException;
+import com.github.aracwong.mockit.db.exception.MockDbException;
 import com.google.common.base.Preconditions;
-import com.github.aracwong.mock.util.FileKit;
+import com.github.aracwong.mockit.util.FileKit;
 import org.h2.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +26,14 @@ import java.util.Properties;
 /**
  * 数据库引擎接口，提供数据库启动 刷新 取得连接及执行语句等功能
  *
- * @author aracwong
- * @Date Oct 22, 2015
+ * @author : aracwong
+ * @Date : Oct 22, 2015
+ * @since : 1.0.0
  */
 
-public class DefaultMockDBEngine implements MockDBEngine {
+public class DefaultMockDbEngine implements MockDbEngine {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMockDBEngine.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMockDbEngine.class);
 
     private boolean isRunning = false;
 

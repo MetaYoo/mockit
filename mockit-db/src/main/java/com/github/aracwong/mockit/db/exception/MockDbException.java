@@ -5,36 +5,27 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-package com.github.aracwong.mock.bean;
-
-import com.alibaba.dubbo.common.utils.ReflectUtils;
-import org.easymock.EasyMock;
-import org.springframework.beans.factory.FactoryBean;
+package com.github.aracwong.mockit.db.exception;
 
 /**
- * @author: aracwong
- * @email: aracwong@163.com
- * @datetime: 2017/11/11 0011 上午 10:47
- * @version: 1.0.0
+ * @author : aracwong
+ * @date : 2017/10/29 0029 下午 7:37
+ * @version : 1.0.0
  */
-public class ReferenceBean extends ReferenceConfig implements FactoryBean {
+public class MockDbException extends Exception {
+    public MockDbException(String message) {
+        super(message);
+    }
 
-    public ReferenceBean() {
+    public MockDbException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public MockDbException(Throwable cause) {
+        super(cause);
+    }
+
+    public MockDbException() {
         super();
-    }
-
-    @Override
-    public Object getObject() throws Exception {
-        return EasyMock.createMock(ReflectUtils.forName(super.getInterfaceClass().getName()));
-    }
-
-    @Override
-    public Class<?> getObjectType() {
-        return getInterfaceClass();
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return true;
     }
 }

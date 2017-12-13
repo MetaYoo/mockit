@@ -5,41 +5,17 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-package com.github.aracwong.mock.util;
+package com.github.aracwong.mockit.ext;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
+import com.github.aracwong.mockit.ext.bean.ReferenceBean;
+import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 /**
- * @author: aracwong
- * @email: aracwong@163.com
- * @datetime: 2017/10/29 0029 下午 7:40
- * @version: 1.0.0
+ * @author aracwong
  */
-public class FileKit {
+public class MockBeanNamespaceHandler extends NamespaceHandlerSupport {
 
-    public static String readText(String path) throws IOException {
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
-        StringBuffer sb = new StringBuffer();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String tmp = br.readLine();
-            while (null != tmp) {
-                sb.append(tmp).append("\r\n");
-                tmp = br.readLine();
-            }
-        } catch (IOException e) {
-            throw e;
-        } finally {
-            if (null != is) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                }
-            }
-        }
-        return sb.toString();
+    @Override
+    public void init() {
+        registerBeanDefinitionParser("reference", new MockBeanDefinitionParser(ReferenceBean.class));
     }
 }
