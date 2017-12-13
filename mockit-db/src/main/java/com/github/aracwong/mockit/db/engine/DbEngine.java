@@ -6,7 +6,7 @@
  *
  */
 
-package com.github.aracwong.mockit.db;
+package com.github.aracwong.mockit.db.engine;
 
 import com.github.aracwong.mockit.db.exception.MockDbException;
 
@@ -18,7 +18,7 @@ import java.sql.Connection;
  * @author :  aracwong
  * @since :  1.0.0
  */
-public interface MockDbEngine {
+public interface DbEngine {
     /**
      * 启动数据库
      * 1. 判断数据库引擎是否正在运行，是则刷新，否则重新加载启动

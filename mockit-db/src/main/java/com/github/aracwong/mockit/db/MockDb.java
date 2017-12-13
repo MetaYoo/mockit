@@ -8,6 +8,7 @@
 package com.github.aracwong.mockit.db;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.github.aracwong.mockit.db.engine.DbEngine;
 import com.github.aracwong.mockit.db.exception.MockDbException;
 import com.google.common.base.Preconditions;
 import com.github.aracwong.mockit.util.FileKit;
@@ -31,9 +32,9 @@ import java.util.Properties;
  * @since : 1.0.0
  */
 
-public class DefaultMockDbEngine implements MockDbEngine {
+public class MockDb implements DbEngine {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMockDbEngine.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MockDb.class);
 
     private boolean isRunning = false;
 
