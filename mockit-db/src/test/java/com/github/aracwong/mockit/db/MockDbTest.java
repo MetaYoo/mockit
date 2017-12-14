@@ -10,9 +10,7 @@ package com.github.aracwong.mockit.db;
 
 import com.github.aracwong.mockit.db.constant.DbInstance;
 import com.github.aracwong.mockit.db.constant.DbTypeEnum;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,10 +26,10 @@ import java.util.List;
  */
 public class MockDbTest {
 
-    MockDb engine;
+    private static MockDb engine;
 
-    @Before
-    public void startUp() throws Exception {
+    @BeforeClass
+    public static void startUp() throws Exception {
 
         List<String> schemaLists = new ArrayList<>();
         schemaLists.add("test-ddl-mysql.sql");
