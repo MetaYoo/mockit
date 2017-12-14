@@ -8,11 +8,14 @@
 
 package com.github.aracwong.mockit.db;
 
+import com.github.aracwong.mockit.db.constant.DbInstance;
+import com.github.aracwong.mockit.db.constant.DbTypeEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -29,22 +32,25 @@ public class MockDbTest {
 
     @Before
     public void startUp() throws Exception {
-        engine = new MockDb();
+
         List<String> schemaLists = new ArrayList<>();
         schemaLists.add("test-schema.sql");
-        engine.setSchemaLocations(schemaLists);
 
         List<String> dataLists = new ArrayList<>();
         dataLists.add("test-data.sql");
-        engine.setDataLocations(dataLists);
 
+        DbInstance instance = new DbInstance(DbTypeEnum.MYSQL.getName(), "TEST", "root", "123456", schemaLists, dataLists);
+        engine = new MockDb(instance);
         engine.startUp();
     }
 
     @Test
-    public void testManualPropLocation() throws Exception {
+    public void testMockMysql() throws Exception {
+
+        Class.forName("org.h2.Driver");
+
+        Connection conn = DriverManager.getConnection("jdbc:h2:mem:TEST;MODE=MYSQL;DB_CLOSE_DELAY=-1", "root", "123456");
         String queryStr = "select * from MOCK_TEST where ID = 1";
-        Connection conn = engine.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(queryStr);
         ResultSet rs = pstmt.executeQuery();
         while(rs.next()) {

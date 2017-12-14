@@ -32,6 +32,7 @@
         <guava.version>20.0</guava.version>
         <easymock.version>3.4</easymock.version>
         <spring.version>4.3.4.RELEASE</spring.version>
+        <mysql-connector-java.version>6.0.6</mysql-connector-java.version>
     </properties>
 
     <licenses>
@@ -214,6 +215,11 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

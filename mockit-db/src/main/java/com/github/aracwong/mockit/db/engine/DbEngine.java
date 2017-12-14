@@ -45,19 +45,4 @@ public interface DbEngine {
      */
     void refresh() throws MockDbException;
 
-    /**
-     * 从数据源中得到数据库连接Connection
-     *  Statement:
-     *  @return
-     *  @throws MockDbException
-     */
-    Connection getConnection() throws MockDbException;
-
-    /**
-     * 执行数据库操作语句
-     *  Statement:
-     *  @param statement
-     *  @throws MockDbException
-     */
-    void execute(String statement) throws MockDbException;
 }

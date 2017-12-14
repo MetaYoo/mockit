@@ -13,35 +13,29 @@ package com.github.aracwong.mockit.db.constant;
  * @version : 1.0.0
  * @date : 2017/12/13
  */
-public enum DbType {
+public enum DbTypeEnum {
 
     /**
      * Oracle
      */
-    ORACLE("ORACLE", "Oracle 11g"),
+    ORACLE("ORACLE"),
 
     /**
      * mysql
      */
-    MYSQL("MYSQL", "Mysql 5.1.7");
+    MYSQL("MYSQL");
 
     private String name;
-    private String desc;
 
-    private DbType() {
-
+    private DbTypeEnum() {
     }
 
-    DbType(String name, String desc) {
+    DbTypeEnum(String name) {
          this.name = name;
-         this.desc = desc;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
-    }
 }

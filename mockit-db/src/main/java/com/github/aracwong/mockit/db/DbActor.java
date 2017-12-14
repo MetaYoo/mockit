@@ -5,33 +5,32 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+
 package com.github.aracwong.mockit.db;
 
-import com.github.aracwong.mockit.db.constant.DbInstance;
+import com.github.aracwong.mockit.db.exception.MockDbException;
 
-import java.util.List;
+import java.sql.Connection;
 
 /**
- * 数据库引擎接口，提供数据库启动 刷新 取得连接及执行语句等功能
- *
- * @author : aracwong
- * @Date : Oct 22, 2015
- * @since : 1.0.0
+ * @author : zpwang
+ * @version : 1.0.0
+ * @date : 2017/12/14
  */
+public interface DbActor {
+    /**
+     * 从数据源中得到数据库连接Connection
+     *  Statement:
+     *  @return
+     *  @throws MockDbException
+     */
+    Connection getConnection() throws MockDbException;
 
-public class MockDb extends AbstractDbEngine {
-
-
-    public MockDb() {
-    }
-
-    public MockDb(DbInstance instance) {
-       super(instance);
-    }
-
-    public MockDb(List<DbInstance> instances) {
-        super(instances);
-    }
-
-
+    /**
+     * 执行数据库操作语句
+     *  Statement:
+     *  @param statement
+     *  @throws MockDbException
+     */
+    void execute(String statement) throws MockDbException;
 }
