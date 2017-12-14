@@ -16,6 +16,7 @@ Test Mock Utils
 # release logs:
 
 v1.0.0 2017/12/05  initial the mockit project.
+v2.0.0 2017/12/14  refactor the mockit project.
 
 
 

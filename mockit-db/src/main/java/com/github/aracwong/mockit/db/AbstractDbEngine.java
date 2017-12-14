@@ -8,7 +8,7 @@
 
 package com.github.aracwong.mockit.db;
 
-import com.github.aracwong.mockit.db.constant.DbInstance;
+import com.github.aracwong.mockit.db.engine.DbInstance;
 import com.github.aracwong.mockit.db.engine.DbEngine;
 import com.github.aracwong.mockit.db.exception.MockDbException;
 

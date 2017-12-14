@@ -7,7 +7,7 @@
     <bean id="mockDb" class="com.github.aracwong.mockit.db.MockDb" init-method="startUp">
          <property name="instances">
              <list>
-                 <bean class="com.github.aracwong.mockit.db.constant.DbInstance">
+                 <bean class="com.github.aracwong.mockit.db.engine.DbInstance">
                       <property name="mode" value="MYSQL"/>
                       <property name="dbName" value="TEST3"/>
                       <property name="user" value="root"/>
@@ -15,7 +15,7 @@
                       <property name="schemaLocations" value="test-ddl-mysql.sql"/>
                       <property name="dataLocations" value="test-dml-mysql.sql"/>
                  </bean>
-                 <bean class="com.github.aracwong.mockit.db.constant.DbInstance">
+                 <bean class="com.github.aracwong.mockit.db.engine.DbInstance">
                      <property name="mode" value="Oracle"/>
                      <property name="dbName" value="TEST4"/>
                      <property name="user" value="root"/>

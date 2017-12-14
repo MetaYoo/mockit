@@ -6,11 +6,11 @@
  *
  */
 
-package com.github.aracwong.mockit.db.constant;
+package com.github.aracwong.mockit.db.engine;
 
 import com.github.aracwong.mockit.db.DbActor;
 import com.github.aracwong.mockit.db.annotation.Function;
-import com.github.aracwong.mockit.db.engine.DbEngine;
+import com.github.aracwong.mockit.db.constant.DbTypeEnum;
 import com.github.aracwong.mockit.db.exception.MockDbException;
 import com.github.aracwong.mockit.db.function.MysqlFunction;
 import com.github.aracwong.mockit.db.function.OracleFunction;
