@@ -9,7 +9,7 @@
              <list>
                  <bean class="com.github.aracwong.mockit.db.constant.DbInstance">
                       <property name="mode" value="MYSQL"/>
-                      <property name="dbName" value="TEST1"/>
+                      <property name="dbName" value="TEST3"/>
                       <property name="user" value="root"/>
                       <property name="password" value="123456"/>
                       <property name="schemaLocations" value="test-ddl-mysql.sql"/>
@@ -17,7 +17,7 @@
                  </bean>
                  <bean class="com.github.aracwong.mockit.db.constant.DbInstance">
                      <property name="mode" value="Oracle"/>
-                     <property name="dbName" value="TEST2"/>
+                     <property name="dbName" value="TEST4"/>
                      <property name="user" value="root"/>
                      <property name="password" value="123456"/>
                      <property name="schemaLocations" value="test-ddl-oracle.sql"/>
