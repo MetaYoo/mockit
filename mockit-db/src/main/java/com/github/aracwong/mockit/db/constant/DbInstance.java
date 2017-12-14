@@ -103,6 +103,13 @@ public class DbInstance implements DbEngine, DbActor {
     /*--------------------------------------------
     |         C O N S T R U C T O R S           |
     ============================================*/
+
+    /**
+     *
+     */
+    public DbInstance() {
+    }
+
     /**
      *
      * @param mode
@@ -290,7 +297,7 @@ public class DbInstance implements DbEngine, DbActor {
                 for (Annotation annotation : annotations) {
                     if (annotation instanceof Function) {
                         String funcName = ((Function)annotation).name();
-                        String methodName = OracleFunction.class.getSimpleName() + "." + method.getName();
+                        String methodName = OracleFunction.class.getName() + "." + method.getName();
                         String sql = "CREATE ALIAS IF NOT EXISTS " + funcName + " FOR \"" + methodName + "\"; ";
                         funcSqlList.add(sql);
                     }

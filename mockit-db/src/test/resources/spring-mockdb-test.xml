@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="mockDb" class="com.github.aracwong.mockit.db.MockDb" init-method="startUp">
+         <property name="instances">
+             <list>
+                 <bean class="com.github.aracwong.mockit.db.constant.DbInstance">
+                      <property name="mode" value="MYSQL"/>
+                      <property name="dbName" value="TEST1"/>
+                      <property name="user" value="root"/>
+                      <property name="password" value="123456"/>
+                      <property name="schemaLocations" value="test-ddl-mysql.sql"/>
+                      <property name="dataLocations" value="test-dml-mysql.sql"/>
+                 </bean>
+                 <bean class="com.github.aracwong.mockit.db.constant.DbInstance">
+                     <property name="mode" value="Oracle"/>
+                     <property name="dbName" value="TEST2"/>
+                     <property name="user" value="root"/>
+                     <property name="password" value="123456"/>
+                     <property name="schemaLocations" value="test-ddl-oracle.sql"/>
+                     <property name="dataLocations" value="test-dml-oracle.sql"/>
+                 </bean>
+             </list>
+         </property>
+    </bean>
+
+</beans>

@@ -95,4 +95,12 @@ public abstract class AbstractDbEngine  implements DbEngine {
     public void addDbInstance(DbInstance instance) {
         instances.add(instance);
     }
+
+    public List<DbInstance> getInstances() {
+        return instances;
+    }
+
+    public void setInstances(List<DbInstance> instances) {
+        this.instances = instances;
+    }
 }

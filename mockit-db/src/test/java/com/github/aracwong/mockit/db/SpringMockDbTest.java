@@ -6,34 +6,45 @@
  *
  */
 
-package com.github.aracwong.mockit.db.function;
+package com.github.aracwong.mockit.db;
 
-import com.github.aracwong.mockit.db.annotation.Function;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * @author : zpwang
  * @version : 1.0.0
- * @date : 2017/12/13
+ * @date : 2017/12/14
  */
-public class OracleFunction {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({"classpath:spring-mockdb-test.xml"})
+public class SpringMockDbTest {
 
-    /**
-     * Oracle `to_date` function
-     *
-     * @param source
-     * @param format
-     * @return
-     * @throws ParseException
-     */
-    @Function(name = "to_date_test")
-    public static java.sql.Date toDate(String source, String format) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        java.util.Date date = sdf.parse(source);
-        return new java.sql.Date(date.getTime());
+    @Test
+    public void testSpringMockOracle() throws Exception {
+
+        Class.forName("org.h2.Driver");
+
+        Connection conn = DriverManager.getConnection("jdbc:h2:mem:TEST2;MODE=Oracle;DB_CLOSE_DELAY=-1", "root", "123456");
+        String queryStr = "select * from MOCK_TEST where ID = 2";
+        PreparedStatement pstmt = conn.prepareStatement(queryStr);
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()) {
+            String name = rs.getString("USER_NAME");
+            Assert.assertEquals("TEST2", name);
+        }
+        rs.close();
+        pstmt.close();
+        conn.close();
     }
-
 
 }

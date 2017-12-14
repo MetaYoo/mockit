@@ -34,10 +34,10 @@ public class MockDbTest {
     public void startUp() throws Exception {
 
         List<String> schemaLists = new ArrayList<>();
-        schemaLists.add("test-schema.sql");
+        schemaLists.add("test-ddl-mysql.sql");
 
         List<String> dataLists = new ArrayList<>();
-        dataLists.add("test-data.sql");
+        dataLists.add("test-dml-mysql.sql");
 
         DbInstance instance1 = new DbInstance(DbTypeEnum.MYSQL.getName(), "TEST1", "root", "123456", schemaLists, dataLists);
         DbInstance instance2 = new DbInstance(DbTypeEnum.MYSQL.getName(), "TEST2", "root", "123456", schemaLists, dataLists);
