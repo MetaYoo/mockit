@@ -39,8 +39,13 @@ public class MockDbTest {
         List<String> dataLists = new ArrayList<>();
         dataLists.add("test-data.sql");
 
-        DbInstance instance = new DbInstance(DbTypeEnum.MYSQL.getName(), "TEST", "root", "123456", schemaLists, dataLists);
-        engine = new MockDb(instance);
+        DbInstance instance1 = new DbInstance(DbTypeEnum.MYSQL.getName(), "TEST1", "root", "123456", schemaLists, dataLists);
+        DbInstance instance2 = new DbInstance(DbTypeEnum.MYSQL.getName(), "TEST2", "root", "123456", schemaLists, dataLists);
+
+        List<DbInstance> instances = new ArrayList<>();
+        instances.add(instance1);
+        instances.add(instance2);
+        engine = new MockDb(instances);
         engine.startUp();
     }
 
@@ -49,7 +54,25 @@ public class MockDbTest {
 
         Class.forName("org.h2.Driver");
 
-        Connection conn = DriverManager.getConnection("jdbc:h2:mem:TEST;MODE=MYSQL;DB_CLOSE_DELAY=-1", "root", "123456");
+        Connection conn = DriverManager.getConnection("jdbc:h2:mem:TEST1;MODE=MYSQL;DB_CLOSE_DELAY=-1", "root", "123456");
+        String queryStr = "select * from MOCK_TEST where ID = 1";
+        PreparedStatement pstmt = conn.prepareStatement(queryStr);
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()) {
+            String name = rs.getString("USER_NAME");
+            Assert.assertEquals("TEST1", name);
+        }
+        rs.close();
+        pstmt.close();
+        conn.close();
+    }
+
+    @Test
+    public void testMockOracle() throws Exception {
+
+        Class.forName("org.h2.Driver");
+
+        Connection conn = DriverManager.getConnection("jdbc:h2:mem:TEST2;MODE=MYSQL;DB_CLOSE_DELAY=-1", "root", "123456");
         String queryStr = "select * from MOCK_TEST where ID = 1";
         PreparedStatement pstmt = conn.prepareStatement(queryStr);
         ResultSet rs = pstmt.executeQuery();

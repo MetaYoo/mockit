@@ -269,7 +269,7 @@ public class DbInstance implements DbEngine, DbActor {
     private void initCustomizedFunction() throws Exception {
         List<String> funcSqlList = new ArrayList<>();
         String mode = null == this.mode ? DEFAULT_MODE : this.mode;
-        if (DbTypeEnum.MYSQL.getName().equals(mode)) {
+        if (DbTypeEnum.MYSQL.getName().equalsIgnoreCase(mode)) {
             Method[] methods = MysqlFunction.class.getDeclaredMethods();
             for (Method method : methods) {
                 Annotation[] annotations = method.getAnnotations();
@@ -283,7 +283,7 @@ public class DbInstance implements DbEngine, DbActor {
                 }
 
             }
-        } else if (DbTypeEnum.ORACLE.getName().equals(mode)) {
+        } else if (DbTypeEnum.ORACLE.getName().equalsIgnoreCase(mode)) {
             Method[] methods = OracleFunction.class.getDeclaredMethods();
             for (Method method : methods) {
                 Annotation[] annotations = method.getAnnotations();
