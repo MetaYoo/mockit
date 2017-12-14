@@ -5,62 +5,34 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-package com.github.aracwong.mockit.db;
+
+package com.github.aracwong.mockit.db.function;
+
+import com.github.aracwong.mockit.db.annotation.Function;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
- * 数据库引擎接口，提供数据库启动 刷新 取得连接及执行语句等功能
- *
- * @author : aracwong
- * @Date : Oct 22, 2015
- * @since : 1.0.0
+ * @author : zpwang
+ * @version : 1.0.0
+ * @date : 2017/12/13
  */
-
-public class MockDb extends AbstractDbEngine {
-
-
-    public MockDb() {
-    }
+public class OracleFunction {
 
     /**
-     * 通过构造方法初始化
+     * Oracle `to_date` function
      *
-     * @param mode
+     * @param source
+     * @param format
+     * @return
+     * @throws ParseException
      */
-    public MockDb(String mode) {
-        super(mode, null, null, null);
-    }
-
-    /**
-     * 通过构造方法初始化
-     *
-     * @param mode
-     * @param dbName
-     */
-    public MockDb(String mode, String dbName) {
-        super(mode, dbName, null, null);
-    }
-
-    /**
-     * 通过构造方法初始化
-     *
-     * @param mode
-     * @param dbName
-     * @param user
-     */
-    public MockDb(String mode, String dbName, String user) {
-        super(mode, dbName, user, null);
-    }
-
-    /**
-     * 通过构造方法初始化
-     *
-     * @param mode
-     * @param dbName
-     * @param user
-     * @param password
-     */
-    public MockDb(String mode, String dbName, String user, String password) {
-        super(mode, dbName, user, password);
+    @Function(name = "to_date")
+    public static java.sql.Date toDate(String source, String format) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        java.util.Date date = sdf.parse(source);
+        return new java.sql.Date(date.getTime());
     }
 
 

@@ -8,14 +8,21 @@
 
 package com.github.aracwong.mockit.db;
 
+import com.github.aracwong.mockit.db.annotation.Function;
+import com.github.aracwong.mockit.db.constant.DbType;
 import com.github.aracwong.mockit.db.engine.DbEngine;
 import com.github.aracwong.mockit.db.exception.MockDbException;
+import com.github.aracwong.mockit.db.function.MysqlFunction;
+import com.github.aracwong.mockit.db.function.OracleFunction;
 import com.github.aracwong.mockit.util.FileKit;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -223,7 +230,43 @@ public abstract class AbstractDbEngine implements DbEngine {
     /**
      * 自定义函数
      */
-    protected abstract void initCustomizedFunction();
+    private void initCustomizedFunction() throws Exception {
+        List<String> funcSqlList = new ArrayList<>();
+        String mode = null == this.mode ? DEFAULT_MODE : this.mode;
+        if (DbType.MYSQL.getName().equals(mode)) {
+            Method[] methods = MysqlFunction.class.getDeclaredMethods();
+            for (Method method : methods) {
+                Annotation[] annotations = method.getAnnotations();
+                for (Annotation annotation : annotations) {
+                    if (annotation instanceof Function) {
+                        String funcName = ((Function)annotation).name();
+                        String methodName = MysqlFunction.class.getName() + "." + method.getName();
+                        String sql = "CREATE ALIAS IF NOT EXISTS " + funcName + " FOR \"" + methodName + "\"; ";
+                        funcSqlList.add(sql);
+                    }
+                }
+
+            }
+        } else if (DbType.ORACLE.getName().equals(mode)) {
+            Method[] methods = OracleFunction.class.getDeclaredMethods();
+            for (Method method : methods) {
+                Annotation[] annotations = method.getAnnotations();
+                for (Annotation annotation : annotations) {
+                    if (annotation instanceof Function) {
+                        String funcName = ((Function)annotation).name();
+                        String methodName = OracleFunction.class.getSimpleName() + "." + method.getName();
+                        String sql = "CREATE ALIAS IF NOT EXISTS " + funcName + " FOR \"" + methodName + "\"; ";
+                        funcSqlList.add(sql);
+                    }
+                }
+
+            }
+        }
+
+        for (String sql : funcSqlList) {
+            this.execute(sql);
+        }
+    }
 
     private void initSchema() throws Exception {
         for (String schemaScript : this.getSchemaLocations()) {
